@@ -1,7 +1,14 @@
 # Udacity Blockchain Developer Nanodegree. Project 2
 ## How to test?
+Download the .zip with the project files.
+
+Unzip into any folder on your computer.
+
+Open Terminal and go to this folder.
+
+Run `npm install` in the folder to install the dependencies.
 ### E2E testing with tests.js file
-In Terminal go to project directory and run ```node``` to open Node.js REPL.
+In project directory run ```node``` to open Node.js REPL.
 
 In Node.js REPL load the classes in simpleChain.js first:
 ```
@@ -14,7 +21,7 @@ Then load the tests.js file. It contains IIFE that will run the tests script:
 Last command will run the IIFE in tests.js.
 Check output of the logs then.
 ### Testing individual methods of Blockchain instance
-In Terminal go to project directory and run ```node``` to open Node.js REPL.
+In project directory run ```node``` to open Node.js REPL.
 In Node.js REPL load the classes in simpleChain.js first:
 ```
 > .load simpleChain.js
@@ -26,6 +33,10 @@ LevelDB will store data.
 ```
 If directory is not empty, BlockchainDb class will read the 
 existing data from existing LevelDB directory.
+
+To delete existing data, just 
+delete the directory, specified in the `new BlockchainDb(dbDir)`. It is `./db` in
+this case.
 
 Now you are ready to create Blockchain instance, using BlockchainDb instance:
 ```
@@ -42,8 +53,9 @@ Now you can test individual methods of Blockchain instance:
 ```
 
 To hack some blocks in the `blockchain`, you can execute this script. 
-Block heights, specified in `invalidBlocks` must exists in the chain.
-Otherwise the script will fail.
+
+__Block heights, specified in `invalidBlocks` must exist in the chain.
+Otherwise the script will fail.__
 ```ecmascript 6
 let invalidBlockHeights = [1,2,5];
 invalidBlockHeights.forEach(index => {
