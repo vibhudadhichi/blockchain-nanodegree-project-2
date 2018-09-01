@@ -1,0 +1,23 @@
+{
+  "name": "blockchain-nanodegree-project-2",
+  "version": "1.0.0",
+  "description": "Contains Block, Blockchain and BlockchainDb classes for project. BlockchainDb is wrapper for LevelDB. ## tests.js Contains the IIFE (immediately-invoked function expression) that tests the following: 1) creation of BlockchainDb and Blockchain instances 2) addition of 20 Blocks to Blockchain 3) successful validation of the Blockchain after addition of 20 blocks 4) invalidation script that hacks body of 3 blocks in the chain 5) failed validation of Blockchain after hack",
+  "main": "simpleChain.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yuryprokashev/blockchain-nanodegree-project-2.git"
+  },
+  "author": "Yury Prokashev",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yuryprokashev/blockchain-nanodegree-project-2/issues"
+  },
+  "homepage": "https://github.com/yuryprokashev/blockchain-nanodegree-project-2#readme",
+  "dependencies": {
+    "crypto-js": "^3.1.9-1",
+    "level": "^4.0.0"
+  }
+}
