@@ -31,11 +31,8 @@ LevelDB will store data.
 ```
 > let db = new BlockchainDb("./db");
 ```
-If directory is not empty, BlockchainDb class will read the 
+> If directory is not empty, BlockchainDb class will read the 
 existing data from existing LevelDB directory.
-
-> If you need to start empty Blockchain in the same directory, you can delete existing data.
-For that just delete the` dbDir` directory, that you specified in the `new BlockchainDb(dbDir)` call.
 
 Now you are ready to create Blockchain instance, using BlockchainDb instance:
 ```
