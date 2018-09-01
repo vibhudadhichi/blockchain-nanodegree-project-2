@@ -34,9 +34,8 @@ LevelDB will store data.
 If directory is not empty, BlockchainDb class will read the 
 existing data from existing LevelDB directory.
 
-To delete existing data, just 
-delete the directory, specified in the `new BlockchainDb(dbDir)`. It is `./db` in
-this case.
+> If you need to start empty Blockchain in the same directory, you can delete existing data.
+For that just delete the` dbDir` directory, that you specified in the `new BlockchainDb(dbDir)` call.
 
 Now you are ready to create Blockchain instance, using BlockchainDb instance:
 ```
