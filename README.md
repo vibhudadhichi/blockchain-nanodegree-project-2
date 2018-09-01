@@ -1,4 +1,69 @@
 # Udacity Blockchain Developer Nanodegree. Project 2
+## How to test?
+### E2E testing with tests.js file
+In Terminal go to project directory and run ```node``` to open Node.js REPL.
+
+In Node.js REPL load the classes in simpleChain.js first:
+```
+> .load simpleChain.js
+```
+Then load the tests.js file. It contains IIFE that will run the tests script:
+```
+> .load tests.js
+```
+Last command will run the IIFE in tests.js.
+Check output of the logs then.
+### Testing individual methods of Blockchain instance
+In Terminal go to project directory and run ```node``` to open Node.js REPL.
+In Node.js REPL load the classes in simpleChain.js first:
+```
+> .load simpleChain.js
+```
+Now you need to create the instance of the BlockchainDb and specify the directory, where
+LevelDB will store data.
+```
+> let db = new BlockchainDb("./db");
+```
+If directory is not empty, BlockchainDb class will read the 
+existing data from existing LevelDB directory.
+
+Now you are ready to create Blockchain instance, using BlockchainDb instance:
+```
+> let blockchain = new Blockchain(db);
+```
+
+Now you can test individual methods of Blockchain instance:
+```
+> blockchain.addBlock(new Block("test block");
+> blockchain.getBlock(1);
+> blockchain.getBlockHeight();
+> blockchain.validateBlock(1);
+> blockchain.validateChain();
+```
+
+To hack some blocks in the `blockchain`, you can execute this script. 
+Block heights, specified in `invalidBlocks` must exists in the chain.
+Otherwise the script will fail.
+```ecmascript 6
+let invalidBlockHeights = [1,2,5];
+invalidBlockHeights.forEach(index => {
+    log(`hacking block at ${index}`);
+    blockchain.db.getBlock(index).then(block => {
+        block.body = `invalid block ${index}`;
+        return blockchain.db.db.put(index, JSON.stringify(block));
+    }).then(result => {
+        log(`block hacked`);
+    }).catch(err => {
+        log(err);
+    });
+});
+```
+Once blocks are hacked, try to call
+```
+> blockchain.validateChain();
+```
+It will log validation errors and provide the heights of invalid blocks.
+
 ## simpleChain.js
 Contains Block, Blockchain and BlockchainDb classes for project.
 BlockchainDb is wrapper for LevelDB.
