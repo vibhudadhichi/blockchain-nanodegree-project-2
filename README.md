@@ -48,13 +48,13 @@ Now you can test individual methods of Blockchain instance:
 > blockchain.validateChain();
 ```
 
-To hack some blocks in the `blockchain`, you can execute this script. 
+To hack some blocks in the `blockchain`, you can execute this script in Node.js REPL.
 
 __Block heights, specified in `invalidBlocks` must exist in the chain.
 Otherwise the script will fail.__
-```ecmascript 6
-let invalidBlockHeights = [1,2,5];
-invalidBlockHeights.forEach(index => {
+```
+> let invalidBlockHeights = [1,2,5];
+> invalidBlockHeights.forEach(index => {
     log(`hacking block at ${index}`);
     blockchain.db.getBlock(index).then(block => {
         block.body = `invalid block ${index}`;
