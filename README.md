@@ -1,6 +1,6 @@
 # Udacity Blockchain Developer Nanodegree. Project 2
 ## simpleChain.js
-Contains Block, Blockchain and BlockchainDB classes for project.
+Contains Block, Blockchain and BlockchainDb classes for project.
 BlockchainDb is wrapper for level DB.
 ## tests.js
 Contains the IIFE (immediately-invoked function expression) that tests the following:
