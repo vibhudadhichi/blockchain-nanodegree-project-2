@@ -89,7 +89,7 @@ errors, indicating each failed Block.
 
 3. To hack some blocks in the `blockchain`, you can execute this script in Node.js REPL.
 
-__Block heights, specified in `invalidBlocks` must exist in the chain.
+__Block heights, specified in `invalidBlockHeights` must exist in the chain.
 Otherwise the script will fail.__
 ```
 > let invalidBlockHeights = [1,2,5];
