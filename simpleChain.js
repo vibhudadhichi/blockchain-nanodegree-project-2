@@ -7,12 +7,6 @@ const SHA256 = require('crypto-js/sha256');
  |                                                            |
  |  =========================================================*/
 const level = require('level');
-/* ===== console.log wrapper =======================
- |  Wrapper for console.log.                        |
- |  ===============================================*/
-function log(message) {
-    console.log(`LOG: ${message}\n`);
-}
 
 /* ===== BlockchainDb Class ========================
  |  Wrapper for leveldb.                            |

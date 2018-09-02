@@ -94,14 +94,14 @@ Otherwise the script will fail.__
 ```
 > let invalidBlockHeights = [1,2,5];
 > invalidBlockHeights.forEach(index => {
-    log(`hacking block at ${index}`);
+    console.log(`hacking block at ${index}`);
     blockchain.getChain().getBlock(index).then(block => {
         block.body = `invalid block ${index}`;
         return blockchain.getChain().getDb().put(index, JSON.stringify(block));
     }).then(result => {
-        log(`block hacked`);
+        console.log(`block hacked`);
     }).catch(err => {
-        log(err);
+        console.log(err);
     });
 });
 ```
