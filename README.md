@@ -13,24 +13,27 @@ __Now there are two options to proceed:__
     3) successful validation of the Blockchain instance after addition of 20 blocks
     4) invalidation script that hacks body of 3 blocks in the Blockchain instance
     5) failed validation of the Blockchain after hack
-2. Test using individual Node.js REPL commands (see below)
+2. Test using individual Node.js REPL commands
 
-## IMPORTANT!
-All Blockchain class methods, including `addBlock()` method is now async and 
+## IMPORTANT! Read before proceeding with any Test Option.
+All Blockchain class methods, including `addBlock(block)` method, are now async and 
 return Promise.
 
 It means, the below `for` loop, which was provided in the project
 input README.md, __does not work anymore__.
 ``` 
 // BELOW CODE IS SYNC!
-// It will fail to populate the blocks in the Blockchain, because addBlock() is async now.
+// It will fail to populate the blocks in the Blockchain, because addBlock(block) is async now.
 // 5: Generate 10 blocks using a for loop
 for (var i = 0; i <= 10; i++) {
   blockchain.addBlock(new Block("test data "+i));
 }
 ```
-You need to use async `for` loop to populate the blocks in the Blockchain. Like:
+Instead, you need to use `for` loop to populate the blocks in the Blockchain that 
+takes into account the async nature of `addBlock(block)`. Like:
 ``` 
+const TOTAL_BLOCKS = 20;
+const ASYNC_WAIT_INTERVAL = 300;
 for(let i = 1; i <= TOTAL_BLOCKS; i++) {
     let b = new Block("simple " + i);
     setTimeout(() => {
@@ -40,40 +43,46 @@ for(let i = 1; i <= TOTAL_BLOCKS; i++) {
 
 Or you can add blocks one-by-one. Like:
 ``` 
-> blockchain.addBlock(new Block("test block"));
+> blockchain.addBlock(new Block("test block 1"));
+> blockchain.addBlock(new Block("test block 2"));
+> blockchain.addBlock(new Block("test block 3"));
+> blockchain.addBlock(new Block("test block 4"));
+> blockchain.addBlock(new Block("test block 5"));
 ```
 ## Option 1. E2E testing with tests.js file
 Load the tests.js file.
-It contains IIFE that will run the tests script:
 ```
 > .load tests.js
 ```
+It contains IIFE that will run the tests.
 Check output of the logs then.
 
 ## Option 2. Testing individual methods of Blockchain instance
-1. Create Blockchain instance, using BlockchainDb instance:
+1. Create Blockchain instance:
 ```
 > let blockchain = new Blockchain();
 ```
 
 2. Now you can test individual methods of Blockchain instance:
-`addBlock` will return Promise of created Block
+
+`addBlock(block)` will return Promise, that resolves to created Block
 ```
 > blockchain.addBlock(new Block("test block")).then(result => console.log(result)).catch(err => console.log(err.message));
 ```
-`getBlock` will return the Promise of the Block for provided height.
+`getBlock(blockHeight)` will return Promise that resolves to the Block of provided height.
 ``` 
 > blockchain.getBlock(1).then(block => console.log(block)).catch(err => console.log(err.message));
 ```
-`getBlockHeight` will return the current height of the Blockchain
+`getBlockHeight()` will return Promise, that resolves into the current height of the Blockchain.
 ``` 
 > blockchain.getBlockHeight().then(height => console.log(height)).catch(err => console.log(err.message));
 ```
-`validateBlock` will return true, when the Block of provided height is valid
+`validateBlock(blockHeight)` will return Promise, that resolves to `true`, when the Block of provided height is valid
 ``` 
 > blockchain.validateBlock(1).then(isValid => console.log(isValid)).catch(err => console.log(err.message));
 ```
-`validateChain` will return true, when the full chain is valid.
+`validateChain()` will return Promise, that resolves to `true`, when the full chain is valid or rejects with
+errors, indicating each failed Block.
 ```
 > blockchain.validateChain().then(isValid => console.log(isValid)).catch(err => console.log(err.message));
 ```
@@ -100,4 +109,4 @@ Once blocks are hacked, try to call:
 ```
 > blockchain.validateChain().then(isValid => console.log(isValid)).catch(err => console.log(err));
 ```
-It will log validation errors and provide the heights of invalid blocks.
+It will log validation errors, indicating each Block that failed validation.
